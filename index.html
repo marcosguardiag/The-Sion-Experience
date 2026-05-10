@@ -1,1 +1,14 @@
-<meta http-equiv="refresh" content="0;url=index.html.txt">
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+fetch('/index.html.txt')
+.then(r=>r.text())
+.then(html=>{
+document.open();
+document.write(html);
+document.close();
+});
+</script>
+</head>
+</html>
