@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/"
+  to = "/Index.html.txt"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*.txt"
+  [headers.values]
+    Content-Type = "text/html; charset=utf-8"
