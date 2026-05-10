@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/"
-  to = "/Index.html.txt"
+  to = "/index.html.txt"
   status = 200
   force = true
 
