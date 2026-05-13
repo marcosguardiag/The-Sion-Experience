@@ -1,10 +1,4 @@
-[[redirects]]
-  from = "/"
-  to = "/index.html.txt"
-  status = 200
-  force = true
-
 [[headers]]
-  for = "/*.txt"
+  for = "/*"
   [headers.values]
     Content-Type = "text/html; charset=utf-8"
