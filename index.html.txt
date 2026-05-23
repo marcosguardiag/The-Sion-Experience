@@ -938,12 +938,33 @@ let cur="morning";
 function openModal(k){cur=k;const d=EX[k];document.getElementById("mLabel").textContent=d.label;document.getElementById("mTitle").innerHTML=d.title;document.getElementById("mPrice").textContent=d.price;document.getElementById("mMeta").textContent=d.meta;document.getElementById("modalBg").classList.add("open");document.body.style.overflow="hidden";}
 function closeModal(){document.getElementById("modalBg").classList.remove("open");document.body.style.overflow="";}
 function closeModalBg(e){if(e.target===document.getElementById("modalBg"))closeModal();}
-function sendReserva(){
+async function sendReserva(){
   const name=document.getElementById("fName").value||"Sin nombre";
   const date=document.getElementById("fDate").value||"Fecha por confirmar";
   const pax=document.getElementById("fPax").value;
   const phone=document.getElementById("fPhone").value||"Sin teléfono";
+  const email=document.getElementById("fEmail").value||"";
   const d=EX[cur];
+
+  // Enviar a Formspree (email)
+  try {
+    await fetch("https://formspree.io/f/xpqnlroo", {
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({
+        excursion: d.label,
+        precio: d.price,
+        horario: d.meta,
+        nombre: name,
+        fecha: date,
+        personas: pax,
+        telefono: phone,
+        email: email
+      })
+    });
+  } catch(e) { console.log("Formspree error:", e); }
+
+  // Abrir WhatsApp
   const msg=encodeURIComponent(`Hola Marcos! Quiero reservar:\n\n🚢 ${d.label}\n📅 ${date}\n👥 ${pax} persona(s)\n💶 ${d.price}\n\nNombre: ${name}\nContacto: ${phone}`);
   window.open(`https://wa.me/34677343548?text=${msg}`,"_blank");
 }
